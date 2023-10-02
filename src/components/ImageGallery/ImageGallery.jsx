@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import ImageGalleryItem from './ImageGalleryItem/ImageGalleryItem';
 import Button from 'components/Button/Button';
-// import { ColorRing } from 'react-loader-spinner';
 import Modal from 'components/Modal/Modal';
 import Loader from 'components/Loader/Loader';
+import ImageApi from 'components/services/ImageApi';
 
 export default class ImageGallery extends Component {
   state = {
@@ -28,19 +28,10 @@ export default class ImageGallery extends Component {
     return <h1>Not forund images at {this.props.searchName}</h1>;
   };
 
-  handleApiImages = () => {
-    fetch(
-      `https://pixabay.com/api/?q=${this.props.searchName}&page=${this.state.page}&key=36746776-e64b35908dc0b8143507a4db3&image_type=photo&orientation=horizontal&per_page=12`
-    )
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
+  // this.props.searchName this.state.page
 
-        return Promise.reject(
-          new Error(`Not Found Images by ${this.props.searchName}`)
-        );
-      })
+  handleApiImages = () => {
+    ImageApi(this.props.searchName, this.state.page)
       .then(r => {
         this.setState(prevProps => ({
           images: [...prevProps.images, ...r.hits],
