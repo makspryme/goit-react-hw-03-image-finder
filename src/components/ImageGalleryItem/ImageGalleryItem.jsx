@@ -1,4 +1,9 @@
-export default function ImageGalleryItem({ id, image, largeImage, onClick }) {
+export default function ImageGalleryItem({
+  id,
+  image,
+  largeImage,
+  onImageClick,
+}) {
   return (
     <>
       <li key={id} className="ImageGalleryItem">
@@ -7,7 +12,7 @@ export default function ImageGalleryItem({ id, image, largeImage, onClick }) {
           src={image}
           alt={largeImage}
           onClick={e => {
-            onClick(e.target.alt);
+            onImageClick(e.target.alt);
           }}
         />
       </li>
