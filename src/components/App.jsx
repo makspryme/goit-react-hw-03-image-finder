@@ -19,7 +19,9 @@ export default class App extends Component {
   componentDidUpdate = (prevProps, prevState) => {
     if (this.state.imageName !== prevState.imageName) {
       this.setState({ images: [], loading: true, page: 1 });
-      this.handleApiImages(prevProps, prevState);
+      setTimeout(() => {
+        this.handleApiImages(prevProps, prevState);
+      }, 1);
     } else if (this.state.page !== prevState.page) {
       this.handleApiImages(prevProps, prevState);
     }
