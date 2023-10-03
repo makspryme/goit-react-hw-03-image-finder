@@ -24,6 +24,7 @@ export default class Searchbar extends Component {
   };
 
   render() {
+    const { value } = this.state;
     return (
       <header className="Searchbar">
         <form className="SearchForm" onSubmit={this.handleSubmit}>
@@ -34,7 +35,7 @@ export default class Searchbar extends Component {
           <input
             className="SearchForm-input"
             type="text"
-            value={this.state.value}
+            value={value}
             onChange={this.handleInputValue}
             // autocomplete="off"
             // autofocus

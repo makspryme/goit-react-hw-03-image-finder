@@ -21,7 +21,6 @@ export default class App extends Component {
       this.setState({ images: [], loading: true, page: 1 });
       this.handleApiImages(prevProps, prevState);
     } else if (this.state.page !== prevState.page) {
-      console.log(1);
       this.handleApiImages(prevProps, prevState);
     }
   };
@@ -80,26 +79,23 @@ export default class App extends Component {
   };
 
   render() {
+    const { imageName, loading, error, images, largeImage } = this.state;
+
     return (
       <div>
         <Searchbar onSubmit={this.handleSubmitForm} />
         <ImageGallery
-          searchName={this.state.imageName}
+          searchName={imageName}
           onImageClick={this.handleModalOpen}
-          loading={this.state.loading}
-          error={this.state.error}
-          images={this.state.images}
+          loading={loading}
+          error={error}
+          images={images}
           largeImage={this.setLargeImage}
         />
-        {this.state.images.length > 0 && (
-          <Button onClick={this.handleLoadMore} />
-        )}
-        {this.state.loading && <Loader />}
-        {this.state.largeImage.length > 0 && (
-          <Modal
-            largeImage={this.state.largeImage}
-            resetImage={this.resetLargeImage}
-          />
+        {images.length > 0 && <Button onClick={this.handleLoadMore} />}
+        {loading && <Loader />}
+        {largeImage.length > 0 && (
+          <Modal largeImage={largeImage} resetImage={this.resetLargeImage} />
         )}
       </div>
     );
